@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OKUNEV Engineering Tools</title>
+  <meta name="description" content="Инженерные программы для проектировщиков АСУ ТП и подстанций: кабельный журнал, сравнение версий файлов, закладки в PDF. Один лаунчер для установки и обновления.">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top__row">
+      <a class="brand" href="#">
+        <img src="assets/favicon.ico" alt="" width="28" height="28">
+        <span>OKUNEV Engineering Tools</span>
+      </a>
+      <nav class="top__nav" aria-label="Разделы">
+        <a href="#programs">Программы</a>
+        <a href="#install">Установка</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Инженерные программы для проектировщиков подстанций</h1>
+        <p class="lead">Скачайте лаунчер. Через него вы установите нужные программы и будете получать их обновления.</p>
+        <div class="hero__actions">
+          <a class="button button--primary" id="download"
+             href="https://github.com/Slava23401/slava23401.github.io/releases/latest/download/OKUNEV.Engineering.Tools-Setup-x64.exe">
+            Скачать лаунчер
+          </a>
+          <span class="hero__meta">Версия <span data-launcher-version>1.1.1</span> · Windows 10/11, 64 бит · около 52 МБ</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="section">
+      <div class="wrap">
+        <h2>Программы</h2>
+        <p class="section__intro">Все программы работают на вашем компьютере. Файлы проекта никуда не отправляются, а исходные файлы не меняются.</p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card__head">
+              <span class="badge" style="--badge: #B4532A" aria-hidden="true">КЖ</span>
+              <div>
+                <h3>Кабельный журнал</h3>
+                <p class="card__version">CableJournal 0.4.0</p>
+              </div>
+            </div>
+            <p>Считает длину каждого кабеля из журнала по трассе на плане DWG/DXF и заполняет <strong>копию</strong> кабельного журнала Excel.</p>
+            <ul>
+              <li>Сама находит кабели на плане по условному обозначению или слою.</li>
+              <li>Предлагает масштаб каждого плана по его заголовку.</li>
+              <li>Учитывает запас, разводку в шкафу и металлорукав. Значения можно настроить.</li>
+              <li>Спорные строки помечает «Требует уточнения», а не угадывает.</li>
+            </ul>
+            <p class="card__needs"><strong>Нужно:</strong> для DWG — установленный AutoCAD 2026. Файлы DXF открываются без AutoCAD. Excel не нужен.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__head">
+              <span class="badge" style="--badge: #534AB7" aria-hidden="true">Ср</span>
+              <div>
+                <h3>Сравнение файлов</h3>
+                <p class="card__version">FileCompare 0.4.1</p>
+              </div>
+            </div>
+            <p>Показывает, что <strong>добавлено, удалено и изменено</strong> между двумя версиями документа. Можно перейти к каждому отличию и сохранить отчёт.</p>
+            <ul>
+              <li>Excel: значения и формулы, строки сопоставляются по смыслу, а не по номеру.</li>
+              <li>PDF и чертежи: наложение «было/стало», тома на сотни листов.</li>
+              <li>Чертежи AutoCAD и КОМПАС сравниваются по печатным листам.</li>
+              <li>Файлы цифровой подстанции МЭК 61850 (SCD, ICD, CID…) сравниваются по смыслу.</li>
+            </ul>
+            <p class="card__needs"><strong>Нужно:</strong> Excel — для таблиц, AutoCAD 2021+ — для DWG, КОМПАС-3D — для своих чертежей. Для PDF и МЭК 61850 ничего не нужно.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__head">
+              <span class="badge" style="--badge: #993556" aria-hidden="true">PDF</span>
+              <div>
+                <h3>PDF Bookmark Studio</h3>
+                <p class="card__version">PDF Bookmark Studio 1.0.0</p>
+              </div>
+            </div>
+            <p>Создаёт закладки и ссылки в томах PDF. Результат сохраняется рядом с оригиналом как <code>&lt;имя&gt;_закладки.pdf</code>.</p>
+            <ul>
+              <li>Закладки по листам с названиями из ведомости.</li>
+              <li>Ссылки из ведомости рабочих чертежей и «Содержания тома».</li>
+              <li>Сразу целая пачка томов: «Сохранить тома без замечаний».</li>
+              <li>Находит ошибки: двойную нумерацию листов, расхождение ведомости и штампа.</li>
+            </ul>
+            <p class="card__needs"><strong>Нужно:</strong> ничего, кроме Windows.</p>
+          </article>
+
+          <article class="card card--launcher">
+            <div class="card__head">
+              <img class="badge badge--image" src="assets/favicon.ico" alt="" width="40" height="40">
+              <div>
+                <h3>Лаунчер</h3>
+                <p class="card__version">OKUNEV Engineering Tools <span data-launcher-version>1.1.1</span></p>
+              </div>
+            </div>
+            <p>Одно окно для всех программ: запуск, установка и обновления.</p>
+            <ul>
+              <li>Показывает, какие программы установлены и какие версии.</li>
+              <li>Сообщает о новой версии и сам скачивает установщик.</li>
+              <li>Обновляет себя так же, как программы.</li>
+            </ul>
+            <p class="card__needs"><strong>Нужно:</strong> интернет — для установки и обновлений. Права администратора не нужны.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="section section--alt">
+      <div class="wrap">
+        <h2>Как установить</h2>
+        <ol class="steps">
+          <li>
+            <h3>Скачайте лаунчер</h3>
+            <p>Кнопка «Скачать лаунчер» вверху страницы. Файл называется <code>OKUNEV.Engineering.Tools-Setup-x64.exe</code>.</p>
+          </li>
+          <li>
+            <h3>Запустите установщик</h3>
+            <p>Лаунчер ставится только для вас, права администратора не нужны. Ярлык появится в меню «Пуск».</p>
+          </li>
+          <li>
+            <h3>Установите программы</h3>
+            <p>В лаунчере откройте «Обновления» и нажмите «Установить» у нужной программы. Лаунчер скачает её установщик и запустит его.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="wrap">
+        <h2>Вопросы</h2>
+        <details>
+          <summary>Windows пишет «Система Windows защитила ваш компьютер»</summary>
+          <p>Установщики пока не подписаны сертификатом, поэтому фильтр SmartScreen их не знает. Если файл скачан с этой страницы, нажмите «Подробнее» → «Выполнить в любом случае». Защиту Windows не отключайте.</p>
+        </details>
+        <details>
+          <summary>Куда устанавливаются программы и как их удалить?</summary>
+          <p>Каждая программа ставится в вашу папку <code>%LOCALAPPDATA%\Programs</code> и удаляется как обычно: «Параметры» → «Приложения». Настройки программ при удалении сохраняются.</p>
+        </details>
+        <details>
+          <summary>Как обновить программу?</summary>
+          <p>Лаунчер сам проверяет обновления и показывает «Доступно обновление». Нажмите «Обновить», закройте программу, если она открыта, и пройдите шаги установщика. Новая версия ставится поверх старой.</p>
+        </details>
+        <details>
+          <summary>Отправляются ли мои файлы в интернет?</summary>
+          <p>Нет. Программы обрабатывают файлы на вашем компьютере. В интернет ходит только лаунчер — чтобы узнать номера новых версий и скачать установщики.</p>
+        </details>
+        <details>
+          <summary>Программы платные?</summary>
+          <p>Нет, программы бесплатные. Они созданы для работы проектировщиков АСУ ТП и подстанций и проверены на реальных проектах. Но они не заменяют инженерную проверку результата.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>OKUNEV Engineering Tools · программы для Windows 10/11 (64 бит)</p>
+    </div>
+  </footer>
+</body>
+</html>
