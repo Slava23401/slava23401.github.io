@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OKUNEV Engineering Tools</title>
-  <meta name="description" content="Инженерные программы для проектировщиков АСУ ТП и подстанций: кабельный журнал, сравнение версий файлов, закладки в PDF. Один лаунчер для установки и обновления.">
+  <meta name="description" content="Программы для проектировщиков АСУ ТП и подстанций: расчёт длин кабелей, сравнение версий документации, закладки в томах PDF. Один лаунчер для установки и обновления.">
   <link rel="icon" href="assets/favicon.ico">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="top">
-    <div class="wrap top__row">
+  <div class="sheet">
+    <header class="top">
       <a class="brand" href="#">
-        <img src="assets/favicon.ico" alt="" width="28" height="28">
+        <img src="assets/favicon.ico" alt="" width="24" height="24">
         <span>OKUNEV Engineering Tools</span>
       </a>
       <nav class="top__nav" aria-label="Разделы">
@@ -20,155 +20,259 @@
         <a href="#install">Установка</a>
         <a href="#faq">Вопросы</a>
       </nav>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <h1>Инженерные программы для проектировщиков подстанций</h1>
-        <p class="lead">Скачайте лаунчер. Через него вы установите нужные программы и будете получать их обновления.</p>
-        <div class="hero__actions">
-          <a class="button button--primary" id="download"
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__text">
+          <h1 id="hero-title">Инструменты проектировщика подстанций</h1>
+          <p class="lead">Кабельный журнал, сравнение версий документации и закладки в томах PDF. Ставятся и обновляются через один лаунчер. Работают на вашем компьютере, без облака.</p>
+        </div>
+
+        <figure class="hero__scheme" aria-hidden="true">
+          <svg viewBox="0 0 520 400" class="scheme">
+            <g class="scheme__grid">
+              <path d="M0 40H520M0 80H520M0 120H520M0 160H520M0 200H520M0 240H520M0 280H520M0 320H520M0 360H520M40 0V400M80 0V400M120 0V400M160 0V400M200 0V400M240 0V400M280 0V400M320 0V400M360 0V400M400 0V400M440 0V400M480 0V400"/>
+            </g>
+            <g class="scheme__ink">
+              <path class="draw" d="M260 18V58"/>
+              <path class="draw" d="M252 58L268 66M260 66V82"/>
+              <rect class="draw" x="250" y="82" width="20" height="20"/>
+              <path class="draw" d="M260 102V140"/>
+              <path class="draw bus" d="M60 140H460"/>
+              <path class="draw" d="M110 140V170M102 170L118 178M110 178V192"/>
+              <rect class="draw" x="100" y="192" width="20" height="20"/>
+              <path class="draw" d="M110 212V250M104 244L110 252L116 244"/>
+              <path class="draw" d="M410 140V170M402 170L418 178M410 178V192"/>
+              <rect class="draw" x="400" y="192" width="20" height="20"/>
+              <path class="draw" d="M410 212V250M404 244L410 252L416 244"/>
+              <path class="draw" d="M260 140V170M252 170L268 178M260 178V192"/>
+              <rect class="draw" x="250" y="192" width="20" height="20"/>
+              <path class="draw" d="M260 212V226"/>
+              <circle class="draw" cx="260" cy="242" r="16"/>
+              <circle class="draw" cx="260" cy="264" r="16"/>
+              <path class="draw" d="M260 280V300"/>
+              <path class="draw bus" d="M150 300H370"/>
+              <path class="draw" d="M190 300V318M182 318H198V334H182Z M190 334V362"/>
+              <path class="draw" d="M260 300V318M252 318H268V334H252Z M260 334V362"/>
+              <path class="draw" d="M330 300V318M322 318H338V334H322Z M330 334V362"/>
+            </g>
+            <g class="scheme__phase">
+              <rect x="60" y="128" width="6" height="6" fill="var(--phase-a)"/>
+              <rect x="70" y="128" width="6" height="6" fill="var(--phase-b)"/>
+              <rect x="80" y="128" width="6" height="6" fill="var(--phase-c)"/>
+            </g>
+            <g class="scheme__labels">
+              <text x="272" y="30">ВЛ 220 кВ</text>
+              <text x="372" y="132">1СШ 220 кВ</text>
+              <text x="282" y="256">Т1</text>
+              <text x="296" y="292">1С 10 кВ</text>
+            </g>
+          </svg>
+        </figure>
+
+        <aside class="stamp" aria-label="Скачать лаунчер">
+          <table class="stamp__table">
+            <tr>
+              <th scope="row">Изделие</th>
+              <td colspan="3" class="stamp__name">OKUNEV Engineering Tools</td>
+            </tr>
+            <tr>
+              <th scope="row">Версия</th>
+              <td data-launcher-version>1.1.1</td>
+              <th scope="row">Размер</th>
+              <td>52 МБ</td>
+            </tr>
+            <tr>
+              <th scope="row">Система</th>
+              <td colspan="3">Windows 10 и 11, 64 бит. Права администратора не нужны.</td>
+            </tr>
+          </table>
+          <a class="button" id="download"
              href="https://github.com/Slava23401/slava23401.github.io/releases/latest/download/OKUNEV.Engineering.Tools-Setup-x64.exe">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M10 3v10M5.5 8.5 10 13l4.5-4.5M4 16.5h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Скачать лаунчер
           </a>
-          <span class="hero__meta">Версия <span data-launcher-version>1.1.1</span> · Windows 10/11, 64 бит · около 52 МБ</span>
-        </div>
-      </div>
-    </section>
+        </aside>
+      </section>
 
-    <section id="programs" class="section">
-      <div class="wrap">
-        <h2>Программы</h2>
-        <p class="section__intro">Все программы работают на вашем компьютере. Файлы проекта никуда не отправляются, а исходные файлы не меняются.</p>
+      <section id="programs" class="programs" aria-labelledby="programs-title">
+        <h2 id="programs-title">Программы</h2>
+        <p class="section-lead">Исходные файлы проекта не меняются: результат всегда сохраняется отдельной копией. Файлы никуда не отправляются.</p>
 
-        <div class="cards">
-          <article class="card">
-            <div class="card__head">
-              <span class="badge" style="--badge: #B4532A" aria-hidden="true">КЖ</span>
-              <div>
-                <h3>Кабельный журнал</h3>
-                <p class="card__version">CableJournal 0.4.0</p>
-              </div>
-            </div>
-            <p>Считает длину каждого кабеля из журнала по трассе на плане DWG/DXF и заполняет <strong>копию</strong> кабельного журнала Excel.</p>
+        <article class="program">
+          <figure class="program__art" aria-hidden="true">
+            <svg viewBox="0 0 320 200">
+              <g class="art-grid"><path d="M0 40H320M0 80H320M0 120H320M0 160H320M40 0V200M80 0V200M120 0V200M160 0V200M200 0V200M240 0V200M280 0V200"/></g>
+              <g class="art-ink">
+                <rect x="24" y="24" width="120" height="80"/>
+                <rect x="160" y="24" width="136" height="80"/>
+                <rect x="24" y="120" width="272" height="56"/>
+                <rect x="40" y="40" width="22" height="30" class="art-fill"/>
+                <rect x="252" y="136" width="22" height="30" class="art-fill"/>
+              </g>
+              <path class="art-route" d="M62 56H100V112H230V151H252"/>
+              <circle class="art-dot" cx="62" cy="56" r="3.5"/>
+              <circle class="art-dot" cx="252" cy="151" r="3.5"/>
+              <g class="art-label">
+                <rect x="150" y="96" width="70" height="20" rx="3"/>
+                <text x="185" y="110">47,3 м</text>
+              </g>
+              <text class="art-small" x="44" y="88">ШУ-1</text>
+              <text class="art-small" x="248" y="186">ШР-4</text>
+            </svg>
+          </figure>
+          <div class="program__text">
+            <h3>Кабельный журнал</h3>
+            <p class="program__meta">CableJournal 0.4.0</p>
+            <p>Считает длину каждого кабеля из журнала по трассе на плане DWG или DXF и заполняет копию кабельного журнала Excel.</p>
             <ul>
-              <li>Сама находит кабели на плане по условному обозначению или слою.</li>
+              <li>Находит кабели на плане по условному обозначению или слою.</li>
               <li>Предлагает масштаб каждого плана по его заголовку.</li>
-              <li>Учитывает запас, разводку в шкафу и металлорукав. Значения можно настроить.</li>
-              <li>Спорные строки помечает «Требует уточнения», а не угадывает.</li>
+              <li>Добавляет запас, разводку в шкафу и металлорукав по вашим правилам.</li>
+              <li>Спорные строки помечает «Требует уточнения» и не угадывает.</li>
             </ul>
-            <p class="card__needs"><strong>Нужно:</strong> для DWG — установленный AutoCAD 2026. Файлы DXF открываются без AutoCAD. Excel не нужен.</p>
-          </article>
+            <p class="program__needs">Для DWG нужен AutoCAD 2026. DXF открывается без AutoCAD, Excel не нужен.</p>
+          </div>
+        </article>
 
-          <article class="card">
-            <div class="card__head">
-              <span class="badge" style="--badge: #534AB7" aria-hidden="true">Ср</span>
-              <div>
-                <h3>Сравнение файлов</h3>
-                <p class="card__version">FileCompare 0.4.1</p>
-              </div>
-            </div>
-            <p>Показывает, что <strong>добавлено, удалено и изменено</strong> между двумя версиями документа. Можно перейти к каждому отличию и сохранить отчёт.</p>
+        <article class="program">
+          <figure class="program__art" aria-hidden="true">
+            <svg viewBox="0 0 320 200">
+              <g class="art-grid"><path d="M0 40H320M0 80H320M0 120H320M0 160H320M40 0V200M80 0V200M120 0V200M160 0V200M200 0V200M240 0V200M280 0V200"/></g>
+              <g class="art-ink">
+                <rect x="40" y="28" width="150" height="150" class="art-paper"/>
+                <rect x="130" y="20" width="150" height="150" class="art-paper"/>
+              </g>
+              <g class="art-lines">
+                <path d="M146 44H262M146 58H240M146 72H256"/>
+                <path d="M146 128H250M146 142H226M146 156H260"/>
+              </g>
+              <path class="art-removed" d="M146 86H230"/>
+              <path class="art-added" d="M146 100H262M146 114H210"/>
+              <rect class="art-change" x="140" y="80" width="130" height="40" rx="3"/>
+            </svg>
+          </figure>
+          <div class="program__text">
+            <h3>Сравнение файлов</h3>
+            <p class="program__meta">FileCompare 0.4.1</p>
+            <p>Показывает, что добавлено, удалено и изменено между двумя версиями документа. По каждому отличию можно перейти к месту в файле и сохранить отчёт.</p>
             <ul>
               <li>Excel: значения и формулы, строки сопоставляются по смыслу, а не по номеру.</li>
-              <li>PDF и чертежи: наложение «было/стало», тома на сотни листов.</li>
+              <li>PDF и чертежи: наложение «было — стало», тома на сотни листов.</li>
               <li>Чертежи AutoCAD и КОМПАС сравниваются по печатным листам.</li>
-              <li>Файлы цифровой подстанции МЭК 61850 (SCD, ICD, CID…) сравниваются по смыслу.</li>
+              <li>Файлы МЭК 61850 (SCD, ICD, CID) сравниваются по терминалам, сети и подпискам.</li>
             </ul>
-            <p class="card__needs"><strong>Нужно:</strong> Excel — для таблиц, AutoCAD 2021+ — для DWG, КОМПАС-3D — для своих чертежей. Для PDF и МЭК 61850 ничего не нужно.</p>
-          </article>
+            <p class="program__needs">Для таблиц нужен Excel, для DWG — AutoCAD 2021 и новее, для своих чертежей — КОМПАС-3D. PDF и МЭК 61850 сравниваются без дополнительных программ.</p>
+          </div>
+        </article>
 
-          <article class="card">
-            <div class="card__head">
-              <span class="badge" style="--badge: #993556" aria-hidden="true">PDF</span>
-              <div>
-                <h3>PDF Bookmark Studio</h3>
-                <p class="card__version">PDF Bookmark Studio 1.0.0</p>
-              </div>
-            </div>
-            <p>Создаёт закладки и ссылки в томах PDF. Результат сохраняется рядом с оригиналом как <code>&lt;имя&gt;_закладки.pdf</code>.</p>
+        <article class="program">
+          <figure class="program__art" aria-hidden="true">
+            <svg viewBox="0 0 320 200">
+              <g class="art-grid"><path d="M0 40H320M0 80H320M0 120H320M0 160H320M40 0V200M80 0V200M120 0V200M160 0V200M200 0V200M240 0V200M280 0V200"/></g>
+              <g class="art-tree">
+                <path d="M32 40H112M44 62H124M44 84H108M44 106H128M32 132H104M44 154H120"/>
+                <path class="art-tree__axis" d="M36 48V106M36 140V154"/>
+              </g>
+              <rect class="art-paper art-ink-stroke" x="168" y="24" width="124" height="160"/>
+              <g class="art-lines"><path d="M184 44H276M184 60H252M184 126H270M184 142H246M184 158H262"/></g>
+              <rect class="art-link" x="180" y="78" width="100" height="34" rx="3"/>
+              <path class="art-route" d="M128 106C150 106 156 95 180 95"/>
+            </svg>
+          </figure>
+          <div class="program__text">
+            <h3>PDF Bookmark Studio</h3>
+            <p class="program__meta">PDF Bookmark Studio 1.0.0</p>
+            <p>Создаёт закладки и ссылки в томах PDF. Результат сохраняется рядом с оригиналом как <span class="nowrap">«имя_закладки.pdf»</span>.</p>
             <ul>
               <li>Закладки по листам с названиями из ведомости.</li>
               <li>Ссылки из ведомости рабочих чертежей и «Содержания тома».</li>
-              <li>Сразу целая пачка томов: «Сохранить тома без замечаний».</li>
-              <li>Находит ошибки: двойную нумерацию листов, расхождение ведомости и штампа.</li>
+              <li>Сразу пачка томов: сохраняет те, где нет замечаний.</li>
+              <li>Находит двойную нумерацию листов и расхождения ведомости со штампом.</li>
             </ul>
-            <p class="card__needs"><strong>Нужно:</strong> ничего, кроме Windows.</p>
-          </article>
+            <p class="program__needs">Дополнительные программы не нужны.</p>
+          </div>
+        </article>
 
-          <article class="card card--launcher">
-            <div class="card__head">
-              <img class="badge badge--image" src="assets/favicon.ico" alt="" width="40" height="40">
-              <div>
-                <h3>Лаунчер</h3>
-                <p class="card__version">OKUNEV Engineering Tools <span data-launcher-version>1.1.1</span></p>
-              </div>
-            </div>
+        <article class="program program--launcher">
+          <figure class="program__art" aria-hidden="true">
+            <svg viewBox="0 0 320 200">
+              <g class="art-grid"><path d="M0 40H320M0 80H320M0 120H320M0 160H320M40 0V200M80 0V200M120 0V200M160 0V200M200 0V200M240 0V200M280 0V200"/></g>
+              <rect class="art-window" x="24" y="24" width="272" height="156" rx="6"/>
+              <path class="art-ink-stroke" d="M24 44H296M92 44V180"/>
+              <g class="art-lines"><path d="M36 60H80M36 74H72M36 88H78"/></g>
+              <g class="art-rows">
+                <rect x="104" y="56" width="180" height="30" rx="3"/>
+                <rect x="104" y="94" width="180" height="30" rx="3"/>
+                <rect x="104" y="132" width="180" height="30" rx="3"/>
+              </g>
+              <g class="art-lines"><path d="M114 71H180M114 109H170M114 147H186"/></g>
+              <rect class="art-pill" x="232" y="64" width="44" height="14" rx="7"/>
+              <rect class="art-pill" x="232" y="102" width="44" height="14" rx="7"/>
+            </svg>
+          </figure>
+          <div class="program__text">
+            <h3>Лаунчер</h3>
+            <p class="program__meta">OKUNEV Engineering Tools <span data-launcher-version>1.1.1</span></p>
             <p>Одно окно для всех программ: запуск, установка и обновления.</p>
             <ul>
-              <li>Показывает, какие программы установлены и какие версии.</li>
-              <li>Сообщает о новой версии и сам скачивает установщик.</li>
-              <li>Обновляет себя так же, как программы.</li>
+              <li>Показывает, какие программы установлены и в каких версиях.</li>
+              <li>Сообщает о новой версии, скачивает установщик и проверяет, что файл не повреждён.</li>
+              <li>Обновляет сам себя так же, как программы.</li>
             </ul>
-            <p class="card__needs"><strong>Нужно:</strong> интернет — для установки и обновлений. Права администратора не нужны.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+            <p class="program__needs">Интернет нужен только для установки и обновлений.</p>
+          </div>
+        </article>
+      </section>
 
-    <section id="install" class="section section--alt">
-      <div class="wrap">
-        <h2>Как установить</h2>
+      <section id="install" class="install" aria-labelledby="install-title">
+        <h2 id="install-title">Установка</h2>
         <ol class="steps">
           <li>
             <h3>Скачайте лаунчер</h3>
-            <p>Кнопка «Скачать лаунчер» вверху страницы. Файл называется <code>OKUNEV.Engineering.Tools-Setup-x64.exe</code>.</p>
+            <p>Файл <span class="nowrap">OKUNEV.Engineering.Tools-Setup-x64.exe</span>, 52 МБ.</p>
           </li>
           <li>
             <h3>Запустите установщик</h3>
-            <p>Лаунчер ставится только для вас, права администратора не нужны. Ярлык появится в меню «Пуск».</p>
+            <p>Лаунчер ставится только для вас, без прав администратора. Ярлык появится в меню «Пуск».</p>
           </li>
           <li>
             <h3>Установите программы</h3>
-            <p>В лаунчере откройте «Обновления» и нажмите «Установить» у нужной программы. Лаунчер скачает её установщик и запустит его.</p>
+            <p>В лаунчере откройте «Обновления» и нажмите «Установить» у нужной программы.</p>
           </li>
         </ol>
-      </div>
-    </section>
+      </section>
 
-    <section id="faq" class="section">
-      <div class="wrap">
-        <h2>Вопросы</h2>
+      <section id="faq" class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">Вопросы</h2>
         <details>
           <summary>Windows пишет «Система Windows защитила ваш компьютер»</summary>
-          <p>Установщики пока не подписаны сертификатом, поэтому фильтр SmartScreen их не знает. Если файл скачан с этой страницы, нажмите «Подробнее» → «Выполнить в любом случае». Защиту Windows не отключайте.</p>
+          <p>Установщики пока не подписаны сертификатом, поэтому фильтр SmartScreen их не знает. Если файл скачан с этой страницы, нажмите «Подробнее», затем «Выполнить в любом случае». Защиту Windows не отключайте.</p>
         </details>
         <details>
-          <summary>Куда устанавливаются программы и как их удалить?</summary>
-          <p>Каждая программа ставится в вашу папку <code>%LOCALAPPDATA%\Programs</code> и удаляется как обычно: «Параметры» → «Приложения». Настройки программ при удалении сохраняются.</p>
+          <summary>Куда ставятся программы и как их удалить?</summary>
+          <p>В вашу папку <span class="nowrap">%LOCALAPPDATA%\Programs</span>. Удаляются как обычно: «Параметры», затем «Приложения». Настройки программ при удалении сохраняются.</p>
         </details>
         <details>
           <summary>Как обновить программу?</summary>
-          <p>Лаунчер сам проверяет обновления и показывает «Доступно обновление». Нажмите «Обновить», закройте программу, если она открыта, и пройдите шаги установщика. Новая версия ставится поверх старой.</p>
+          <p>Лаунчер сам проверяет обновления. Нажмите «Обновить», закройте программу, если она открыта, и пройдите шаги установщика. Новая версия ставится поверх старой.</p>
         </details>
         <details>
           <summary>Отправляются ли мои файлы в интернет?</summary>
-          <p>Нет. Программы обрабатывают файлы на вашем компьютере. В интернет ходит только лаунчер — чтобы узнать номера новых версий и скачать установщики.</p>
+          <p>Нет. Программы обрабатывают файлы на вашем компьютере. В интернет обращается только лаунчер: чтобы узнать номера новых версий и скачать установщики.</p>
         </details>
         <details>
           <summary>Программы платные?</summary>
-          <p>Нет, программы бесплатные. Они созданы для работы проектировщиков АСУ ТП и подстанций и проверены на реальных проектах. Но они не заменяют инженерную проверку результата.</p>
+          <p>Нет, бесплатные. Они проверены на реальных проектах, но не заменяют инженерную проверку результата.</p>
         </details>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer class="footer">
-    <div class="wrap">
-      <p>OKUNEV Engineering Tools · программы для Windows 10/11 (64 бит)</p>
-    </div>
-  </footer>
+    <footer class="footer">
+      <span>OKUNEV Engineering Tools</span>
+      <span>Программы для Windows 10 и 11</span>
+    </footer>
+  </div>
 </body>
 </html>
