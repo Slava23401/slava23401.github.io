@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08151f">
+  <meta name="description" content="Бесплатный интерактивный курс для начинающего проектировщика АСУ ТП, ССПИ и телемеханики электрических подстанций: документация, нормы, схемы, практические задания и тесты.">
+  <title>АСУ ТП Академия — вводный курс проектировщика подстанций</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Перейти к содержанию</a>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Навигация по курсу">
+      <a class="brand" href="#start" aria-label="АСУ ТП Академия — начало">
+        <span class="brand-icon" aria-hidden="true">⌁</span><span><strong>АСУ ТП</strong><small>АКАДЕМИЯ</small></span>
+      </a>
+      <div class="sidebar-label">ВВОДНЫЙ КУРС / v1.0</div>
+      <nav class="side-nav" id="side-nav">
+        <a href="#start" class="nav-link active"><span>01</span> Главная</a>
+        <a href="#work" class="nav-link"><span>02</span> Чем мы занимаемся</a>
+        <a href="#substation" class="nav-link"><span>03</span> Как работает АСУ ТП</a>
+        <a href="#documents" class="nav-link"><span>04</span> ТЗ → ОТР → ПД → РД</a>
+        <a href="#signals" class="nav-link"><span>05</span> Сигналы и протоколы</a>
+        <a href="#standards" class="nav-link"><span>06</span> ГОСТ и СТО</a>
+        <a href="#roadmap" class="nav-link"><span>07</span> План на 4 недели</a>
+        <a href="#tasks" class="nav-link"><span>08</span> Практические задания</a>
+        <a href="#exam" class="nav-link"><span>09</span> Проверка знаний</a>
+        <a href="#dictionary" class="nav-link"><span>10</span> Словарь</a>
+        <a href="#finish" class="nav-link"><span>11</span> Итоговый проект</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="muted-label">ВАШ ПРОГРЕСС</div><div class="progress-line"><div class="progress-fill" id="global-progress" style="width:0%"></div></div><span id="progress-text">0 из 20 этапов</span><p class="tiny">Прогресс хранится только в этом браузере.</p></div>
+    </aside>
+
+    <main id="main" class="main">
+      <div class="mobile-top"><a class="brand" href="#start"><span class="brand-icon">⌁</span><strong>АСУ ТП Академия</strong></a><span class="mobile-hint">Учебный курс · 2026</span></div>
+      <section id="start" class="section hero-section">
+        <div class="eyebrow"><span class="pulse-dot"></span> ПРАКТИЧЕСКОЕ ВВЕДЕНИЕ В ПРОФЕССИЮ <span class="eyebrow-date">Актуализация: 30.10.2026</span></div>
+        <div class="hero-grid"><div>
+          <div class="pill">ИНЖЕНЕРИЯ ЭЛЕКТРИЧЕСКИХ ПОДСТАНЦИЙ</div>
+          <h1>От первого сигнала<br>до готового <em>проекта.</em></h1>
+          <p class="lead">Интерактивный курс для нового инженера-проектировщика АСУ ТП, ССПИ и телемеханики подстанций 35–220 кВ. Разберитесь в задачах отдела, составе документации и логике проектных решений.</p>
+          <div class="hero-buttons"><a class="btn primary" href="#work">Начать обучение <span aria-hidden="true">↗</span></a><a class="btn ghost" href="#roadmap">План на месяц</a></div>
+          <div class="hero-stats"><div><strong>4 <span>недели</span></strong><small>адаптационная программа</small></div><div><strong>6 <span>кейсов</span></strong><small>с разбором решений</small></div><div><strong>24 <span>вопроса</span></strong><small>в итоговом тесте</small></div></div>
+        </div>
+        <div class="hero-visual" aria-label="Условный путь сигнала от электрической подстанции до центра управления">
+          <div class="visual-heading"><span class="live-indicator">● ДАННЫЕ</span><span>ПС 35/110 кВ</span></div>
+          <svg class="station-svg" viewBox="0 0 430 315" role="img" aria-label="Схема передачи ТС и ТИ от полевого оборудования в шкаф АСУ ТП и по каналу связи диспетчеру">
+            <defs><linearGradient id="rail" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#37e6c2"/><stop offset="1" stop-color="#5b99fc"/></linearGradient></defs>
+            <path d="M20 50 H410 M20 153 H410 M20 257 H410" stroke="#233746" stroke-width="1" stroke-dasharray="3 7"/>
+            <g stroke="#617a8e" stroke-width="2" fill="none"><path d="M60 85 V145 M60 145 H150 M150 145 V192"/><path d="M242 145 H320 V192"/><path d="M150 254 H320"/></g>
+            <rect x="24" y="28" width="160" height="62" rx="11" fill="#0d2935" stroke="#315663"/><text x="39" y="53" fill="#83b3bd" font-size="11">ПОЛЕВОЙ УРОВЕНЬ</text><text x="39" y="76" fill="#f1f8fa" font-size="14" font-weight="700">Выключатель 35 кВ</text>
+            <rect x="243" y="102" width="166" height="76" rx="11" fill="#122d3b" stroke="#315663"/><text x="259" y="127" fill="#83b3bd" font-size="11">УРОВЕНЬ ПС</text><text x="259" y="150" fill="#f1f8fa" font-size="14" font-weight="700">Шкаф АСУ ТП</text><text x="259" y="167" fill="#4de1c5" font-size="11">Контроллер · сеть</text>
+            <rect x="24" y="190" width="160" height="76" rx="11" fill="#0d2935" stroke="#315663"/><text x="39" y="214" fill="#83b3bd" font-size="11">ИСТОЧНИК ИЗМЕРЕНИЙ</text><text x="39" y="236" fill="#f1f8fa" font-size="14" font-weight="700">Токи, напряжения</text><text x="39" y="253" fill="#4de1c5" font-size="11">ТИ / цифровой обмен</text>
+            <rect x="243" y="224" width="166" height="66" rx="11" fill="#0d2935" stroke="#315663"/><text x="259" y="247" fill="#83b3bd" font-size="11">ВНЕШНИЙ УРОВЕНЬ</text><text x="259" y="269" fill="#f1f8fa" font-size="14" font-weight="700">ЦУС / диспетчер</text>
+            <path d="M184 59 H325 V102" stroke="url(#rail)" stroke-width="3" fill="none" stroke-dasharray="7 5"/><circle cx="325" cy="102" r="5" fill="#4ce5bf"/><path d="M184 228 H211 V149 H243" stroke="url(#rail)" stroke-width="3" fill="none" stroke-dasharray="7 5"/><path d="M325 178 V224" stroke="url(#rail)" stroke-width="3" stroke-dasharray="7 5"/><circle cx="325" cy="224" r="5" fill="#4ce5bf"/>
+          </svg>
+          <div class="visual-footer"><span><b class="dot mint"></b>ТС / ТИ / ТУ</span><span><b class="dot blue"></b>IEC 104 / IEC 61850</span></div>
+          <div class="visual-disclaimer">Схема функциональная, не монтажная.</div>
+        </div></div>
+        <div class="info-strip"><span class="info-icon">i</span><p><strong>Область ответственности.</strong> Мы проектируем автоматизацию, сбор и передачу информации и интеграцию с РЗА. Проектирование схем защит и расчёт уставок РЗА — смежная дисциплина, а не задача этого курса.</p></div>
+      </section>
+
+      <section id="work" class="section">
+        <div class="section-heading"><span class="section-num">01 / ПРОФЕССИЯ</span><h2>Чем занимается наш отдел</h2><p>В двух словах: мы проектируем решения, благодаря которым оборудование подстанции можно наблюдать, контролировать и, когда предусмотрено проектом, управлять им удалённо.</p></div>
+        <div class="cards three">
+          <article class="feature-card"><div class="feature-icon">◈</div><h3>АСУ ТП</h3><p>Система автоматизированного управления технологическими процессами: сбор данных, визуализация, архивирование, обмен, контроль и разрешённое управление.</p><span class="tag">Архитектура системы</span></article>
+          <article class="feature-card"><div class="feature-icon">⌁</div><h3>ССПИ / телемеханика</h3><p>Сбор и передача технологической информации между подстанцией и диспетчерскими пунктами по заданным каналам и протоколам.</p><span class="tag">ТС · ТИ · ТУ</span></article>
+          <article class="feature-card"><div class="feature-icon">▦</div><h3>Проектирование</h3><p>Получаем исходные данные, прорабатываем решения, оформляем ОТР/ПД/РД, формируем спецификации, таблицы сигналов и задания смежным отделам.</p><span class="tag">Результат — документы</span></article>
+        </div>
+        <div class="split-layout">
+          <div class="panel"><h3>Что инженер делает на практике</h3><ol class="numbered"><li><b>Анализирует</b> ТЗ, схемы подстанции, существующую ТМ, перечни сигналов и ограничения.</li><li><b>Выбирает</b> принципиальную архитектуру АСУ ТП, способы интеграции и каналы обмена.</li><li><b>Проектирует</b> состав оборудования, информационные и кабельные связи, питание, размещение.</li><li><b>Оформляет</b> схемы, чертежи, ведомости, спецификации и документацию для согласований.</li><li><b>Проверяет</b> согласованность сигналов, интерфейсов, кабелей, спецификаций и ТЗ.</li></ol></div>
+          <div class="panel panel-accent"><h3>С кем взаимодействуем</h3><div class="role-row"><span>ЭТ / первичное оборудование</span><small>Схема ПС, аппараты, трансформаторы</small></div><div class="role-row"><span>РЗА и ПА</span><small>Сигналы, интерфейсы, управление, интеграция</small></div><div class="role-row"><span>Связь / ВОЛС</span><small>Каналы, оборудование, точки подключения</small></div><div class="role-row"><span>СС / электропитание</span><small>Резервирование питания, ИБП, щиты</small></div><div class="role-row"><span>Эксплуатация / ЦУС / ДП</span><small>Перечни сигналов, диспетчерские требования</small></div><div class="role-row"><span>Сметчики / монтаж / ПНР</span><small>Объёмы, монтажные данные, испытания</small></div></div>
+        </div>
+        <div class="mentor-tip">Рабочий принцип: <strong>ни один сигнал или кабель не возникает «из воздуха».</strong> У каждого должны быть источник, назначение, способ передачи и документ-основание.</div>
+      </section>
+
+      <section id="substation" class="section">
+        <div class="section-heading"><span class="section-num">02 / ОБЪЕКТ</span><h2>Как устроена подстанция</h2><p>Нужно понимать электротехнический объект настолько, чтобы корректно привязывать сигналы и команды к оборудованию.</p></div>
+        <div class="cards two"><div class="panel"><h3>Первичное оборудование</h3><p>Силовые трансформаторы, выключатели, разъединители, заземляющие ножи, измерительные трансформаторы, сборные шины. Оно непосредственно участвует в передаче и распределении электроэнергии.</p><div class="tag-set"><span class="tag">Трансформатор</span><span class="tag">Выключатель</span><span class="tag">Разъединитель</span><span class="tag">ТТ / ТН</span></div></div><div class="panel"><h3>Вторичные системы</h3><p>РЗА, автоматика, оперативная блокировка, измерительные преобразователи, ССПИ, АСУ ТП, связь, электропитание. Они измеряют, защищают, контролируют и управляют оборудованием.</p><div class="tag-set"><span class="tag">РЗА</span><span class="tag">ССПИ</span><span class="tag">Контроллеры</span><span class="tag">СГП</span></div></div></div>
+        <div class="panel diagram-panel"><h3>Путь информации: от аппарата до диспетчера</h3><div class="flow-diagram"><div class="flow-box"><small>01 · ИСТОЧНИК</small><strong>Выключатель 35 кВ</strong><span>Положение / аварии</span></div><span class="arrow">→</span><div class="flow-box"><small>02 · СБОР</small><strong>Контроллер / РЗА</strong><span>Считывание событий</span></div><span class="arrow">→</span><div class="flow-box"><small>03 · СЕТЬ ПС</small><strong>ПТК АСУ ТП</strong><span>Обработка / архив</span></div><span class="arrow">→</span><div class="flow-box"><small>04 · ОБМЕН</small><strong>ЦУС / ДП</strong><span>IEC 104 / IEC 101</span></div></div><p class="fine-print">Маршрут зависит от проекта: данные могут поступать по дискретным цепям либо по цифровому интерфейсу, а верхний уровень может отсутствовать в локальном комплексе ССПИ.</p></div>
+        <div class="callout"><b>Пример</b><p>Поступил сигнал «Выключатель В 35 Т‑1 отключён». Его источником может быть блок-контакт выключателя или устройство, контролирующее состояние аппарата. В проекте должны быть определены достоверный источник, физический/логический интерфейс, идентификатор сигнала, приёмник и назначение.</p></div>
+      </section>
+
+      <section id="documents" class="section">
+        <div class="section-heading"><span class="section-num">03 / ДОКУМЕНТАЦИЯ</span><h2>От ТЗ до рабочих чертежей</h2><p>Главное различие — глубина проработки и цель документа. Названия «ТЗ», «ОТР», «ПД» и «РД» не образуют единую обязательную линейную последовательность во всех договорах.</p></div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-mark">ТЗ</div><div><h3>Техническое задание — <em>что требуется?</em></h3><p>Требования к функциям, объекту, количеству и качеству информации, каналам связи, оборудованию, надёжности, испытаниям, границам работ.</p><div class="example">Пример: «Передать положения новых выключателей 35 кВ в ДП по согласованному протоколу».</div></div></div>
+          <div class="timeline-item"><div class="timeline-mark">ОТР</div><div><h3>Основные технические решения — <em>какую концепцию выбираем?</em></h3><p>Кратко показываем архитектуру, принципы интеграции существующей системы, состав оборудования, схемы обмена, питание и размещение. ОТР — распространённый договорной этап/документ, а не обязательная стадия по ПП № 87.</p><div class="example">Пример: «Устанавливаем шкаф ССПИ; существующую ТМ интегрируем через согласованный интерфейс».</div></div></div>
+          <div class="timeline-item"><div class="timeline-mark">ПД</div><div><h3>Проектная документация — <em>почему решение допустимо?</em></h3><p>Фиксируем и обосновываем проектные решения в составе и объёме, определённых законодательством, заданием и видом объекта. ПД ориентирована на согласование, экспертизу в применимых случаях и подтверждение требований.</p><div class="example">Пример: структурная схема системы, описание связи, питания, отказоустойчивости и информационных потоков.</div></div></div>
+          <div class="timeline-item"><div class="timeline-mark">РД</div><div><h3>Рабочая документация — <em>как это построить?</em></h3><p>Схемы соединений и подключений, расположение оборудования, клеммные подключения, кабельный журнал, спецификация оборудования, ведомости, рабочие чертежи.</p><div class="example">Пример: от контактов QF‑1 до входов контроллера, с марками кабелей, клеммами и позициями.</div></div></div>
+          <div class="timeline-item"><div class="timeline-mark">ЗД</div><div><h3>Заводская документация — <em>как собрать шкаф?</em></h3><p>Комплект изготовителя: размещение аппаратов, внутренний монтаж, клеммы, схемы шкафа. Состав выдачи зависит от договора, заказчика и разделения ответственности с заводом.</p></div></div>
+          <div class="timeline-item"><div class="timeline-mark">ПНР</div><div><h3>Пусконаладочные работы — <em>как проверить?</em></h3><p>Проверка монтажа, сигналов и команд, каналов связи, функциональных алгоритмов, архивов, обмена с верхним уровнем и результатов испытаний.</p></div></div>
+        </div>
+        <div class="panel checklist-panel"><h3>Что нужно проверить перед выдачей РД</h3><div class="check-grid"><label><input type="checkbox" data-check="rd1"> Совпадают названия оборудования по всем документам</label><label><input type="checkbox" data-check="rd2"> Есть источник и приёмник каждого сигнала</label><label><input type="checkbox" data-check="rd3"> Интерфейсы и протоколы подтверждены документацией</label><label><input type="checkbox" data-check="rd4"> Кабели учтены в журналах и спецификации</label><label><input type="checkbox" data-check="rd5"> Питание и резервирование согласованы</label><label><input type="checkbox" data-check="rd6"> Все замечания согласования закрыты</label></div></div>
+      </section>
+
+      <section id="signals" class="section">
+        <div class="section-heading"><span class="section-num">04 / ДАННЫЕ И СВЯЗЬ</span><h2>ТС, ТИ, ТУ: три базовые сущности</h2><p>Нужно отличать логический сигнал от физической клеммы, кабельной жилы, точки протокола и расценки ПНР. Это не одно и то же.</p></div>
+        <div class="cards three signal-cards"><div class="signal-card"><div class="big-symbol">ТС</div><h3>Телесигнализация</h3><p>Дискретные состояния и события: «включено», «отключено», «авария», «ключ в местном режиме».</p><small>Одноточечные / двухточечные значения</small></div><div class="signal-card"><div class="big-symbol">ТИ</div><h3>Телеизмерения</h3><p>Числовые величины: ток, напряжение, мощность, частота, температура.</p><small>Значение, единица измерения, масштаб, качество</small></div><div class="signal-card"><div class="big-symbol">ТУ</div><h3>Телеуправление</h3><p>Диспетчерские команды: включить/отключить выключатель, изменить состояние управляемого объекта.</p><small>Права, разрешения, блокировки, подтверждение</small></div></div>
+        <div class="panel data-panel"><div class="table-header"><div><h3>Мини-пример таблицы сигналов</h3><p>Условная ПС с двумя проектируемыми выключателями 35 кВ.</p></div><button class="btn small ghost" id="export-signals" type="button">Скачать CSV ↗</button></div><div class="table-scroll"><table><thead><tr><th>Объект</th><th>Сигнал / команда</th><th>Тип</th><th>Кол-во логических точек</th><th>Примечание</th></tr></thead><tbody><tr><td>В 35 Т‑1 и Т‑2</td><td>Положение</td><td><span class="table-badge">ТС DP</span></td><td>2</td><td>По одной двухточечной позиции на аппарат</td></tr><tr><td>В 35 Т‑1 и Т‑2</td><td>Неисправность</td><td><span class="table-badge">ТС SP</span></td><td>2</td><td>По одной одноточечной позиции</td></tr><tr><td>В 35 Т‑1 и Т‑2</td><td>Местное управление</td><td><span class="table-badge">ТС SP</span></td><td>2</td><td>По одной одноточечной позиции</td></tr><tr><td>В 35 Т‑1 и Т‑2</td><td>Токи фаз A/B/C</td><td><span class="table-badge indigo">ТИ</span></td><td>6</td><td>3 фазы × 2 выключателя</td></tr><tr><td>В 35 Т‑1 и Т‑2</td><td>Отключить / включить</td><td><span class="table-badge amber">ТУ</span></td><td>2</td><td>По одному двухпозиционному объекту команды; согласовать модель</td></tr></tbody></table></div><p class="fine-print">В примере логических точек: 2 DP + 4 SP + 6 ТИ + 2 командных объекта. Это <strong>не</strong> автоматический подсчёт физических дискретных входов/выходов, адресов конкретного протокола или каналов ПНР.</p></div>
+        <div class="panel"><h3>Протоколы, о которых обязательно знать</h3><div class="protocol-grid"><div><strong>IEC 60870‑5‑101</strong><p>Телемеханика. В типовом случае последовательный канал связи и передача ТС, ТИ, ТУ.</p></div><div><strong>IEC 60870‑5‑104</strong><p>Телемеханика поверх TCP/IP. Часто применяется для связи ПС с диспетчерским уровнем.</p></div><div><strong>IEC 61850 (MMS / GOOSE)</strong><p>Интеграция и обмен внутри ПС: MMS — клиент-серверный обмен, GOOSE — передача событий в локальной сети.</p></div><div><strong>Modbus RTU / TCP</strong><p>Интеграция контроллеров, измерителей и вспомогательных устройств; необходимо знать карту регистров и типы данных.</p></div><div><strong>RS‑485</strong><p>Физический интерфейс, <strong>не протокол</strong>. Требует проверки топологии линии, оконечных сопротивлений, общего потенциала и защиты.</p></div><div><strong>ВОЛС / Ethernet / GSM</strong><p>Среда или технология связи, <strong>не прикладной протокол</strong>. Канал выбирается по требованиям объекта и доступной инфраструктуре.</p></div></div></div>
+        <div class="callout warning"><b>Важно для телеуправления</b><p>Команды нельзя проектировать как «простую передачу битов». Нужно определить источник, права управления, местный/дистанционный режим, блокировки, модель команды, обратное подтверждение и порядок проверки.</p></div>
+      </section>
+
+      <section id="standards" class="section">
+        <div class="section-heading"><span class="section-num">05 / НОРМАТИВНАЯ БАЗА</span><h2>Что читать в первую очередь</h2><p>Не надо заучивать сотни страниц сразу. Начните с назначения документа, области применения и разделов, непосредственно относящихся к текущей задаче.</p></div>
+        <div class="standard-notice"><span>✓</span><p>Статус ГОСТ и реквизиты основных документов проверены по Росстандарту, отраслевые СТО — по доступным отраслевым источникам. Перед применением в проекте проверьте редакцию, применимость, договор и требования конкретного заказчика.</p></div>
+        <div class="filter-bar"><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="standards-search" type="search" placeholder="Найти стандарт по номеру или теме…" aria-label="Поиск нормативных документов"></div><div class="filter-pills" id="standard-filters"><button class="chip active" data-tier="all">Все</button><button class="chip" data-tier="1">Изучить сразу</button><button class="chip" data-tier="2">Следующий этап</button><button class="chip" data-tier="3">По задаче</button></div></div>
+        <div class="standard-list" id="standards-list"></div><div class="callout"><b>Иерархия требований</b><p>Законодательство и обязательные требования нельзя подменять СТО. Стандарты организации применяются с учётом их сферы действия, договора и требований заказчика. Сам по себе факт существования ГОСТ или СТО не означает обязательности каждого его положения во всех проектах.</p></div>
+      </section>
+
+      <section id="roadmap" class="section">
+        <div class="section-heading"><span class="section-num">06 / АДАПТАЦИЯ</span><h2>План обучения на 20 рабочих дней</h2><p>Для специалиста с базовой электротехнической подготовкой. Программа рассчитана на изучение с наставником; в конце каждой недели требуется проверка практики.</p></div>
+        <div id="week-list" class="week-list"></div><div class="roadmap-footer"><button type="button" class="btn ghost small" id="reset-progress">Сбросить отметки изучения</button><span class="fine-print">Отметки сохраняются локально на устройстве. Серверного журнала сотрудников нет.</span></div>
+      </section>
+
+      <section id="tasks" class="section">
+        <div class="section-heading"><span class="section-num">07 / ПРАКТИКА</span><h2>Шесть задач из работы проектировщика</h2><p>Все примеры учебные, без использования реальных схем и сведений о действующих энергообъектах. Сначала выполните работу самостоятельно, затем откройте разбор.</p></div>
+        <div class="exercises" id="exercise-list"></div>
+      </section>
+
+      <section id="exam" class="section">
+        <div class="section-heading"><span class="section-num">08 / КОНТРОЛЬ</span><h2>Тест: 24 вопроса</h2><p>Один правильный ответ в каждом вопросе. Для зачёта рекомендуем 20 из 24 и успешную практическую работу. Тест не заменяет проверку выполненного проекта.</p></div>
+        <div class="exam-top"><div class="exam-score"><strong id="exam-score">— / 24</strong><small id="exam-status">Результат появится после проверки</small></div><div class="exam-explain">Темы: объекты и сигналы, документация, интерфейсы, нормативная база, профессиональные решения.</div></div>
+        <form id="quiz-form" novalidate><div id="quiz-list" class="quiz-list"></div><div class="quiz-actions"><button class="btn primary" type="submit">Проверить ответы <span aria-hidden="true">↗</span></button><button class="btn ghost" type="button" id="quiz-reset">Пройти заново</button></div></form>
+        <div class="result-panel" id="exam-result" hidden role="status" aria-live="polite"></div>
+      </section>
+
+      <section id="dictionary" class="section">
+        <div class="section-heading"><span class="section-num">09 / СПРАВОЧНИК</span><h2>Словарь начинающего инженера</h2><p>Короткие объяснения встречающихся в заданиях, схемах и пояснительных записках терминов.</p></div>
+        <div class="search-wrap dictionary-search"><span aria-hidden="true">⌕</span><input id="glossary-search" type="search" placeholder="Например: DP, ВОЛС, СГП, GOOSE…" aria-label="Поиск терминов"></div><div class="glossary-grid" id="glossary-grid"></div>
+      </section>
+
+      <section id="finish" class="section finish-section">
+        <div class="section-heading"><span class="section-num">10 / ИТОГОВАЯ РАБОТА</span><h2>Первый собственный учебный проект</h2><p>После 4 недель специалист готовит небольшой комплект по условному расширению ССПИ ПС 35/10 кВ: два выключателя 35 кВ и передача данных диспетчеру.</p></div>
+        <div class="cards two"><div class="panel"><h3>Что нужно выдать наставнику</h3><ol class="numbered"><li>Реестр исходных данных и открытых вопросов.</li><li>Структурную схему информационных связей.</li><li>Таблицу ТС/ТИ/ТУ с источниками и приёмниками.</li><li>Предварительный выбор интерфейсов и каналов обмена.</li><li>Перечень оборудования и фрагмент спецификации.</li><li>Описание питания, резервирования и границ ответственности.</li><li>Самопроверку на соответствие ТЗ и РД.</li></ol></div><div class="panel panel-accent"><h3>Как будет оцениваться работа</h3><div class="score-row"><span>Исходные данные и вопросы</span><b>20</b></div><div class="score-row"><span>Техническая корректность</span><b>30</b></div><div class="score-row"><span>Сигналы и информационные связи</span><b>20</b></div><div class="score-row"><span>Комплектность и согласованность РД</span><b>20</b></div><div class="score-row"><span>Самопроверка и пояснения</span><b>10</b></div><div class="score-total"><span>ВСЕГО</span><b>100 баллов</b></div><p class="fine-print">Рекомендуемый порог 80/100 при отсутствии критических ошибок: несанкционированного ТУ, неописанных интерфейсов, несогласованного питания и отсутствия источников сигналов.</p></div></div>
+        <div class="completion"><div><h3>Вы готовы к первой проектной задаче.</h3><p>Результат адаптации подтверждает наставник по реальным чертежам и ответам на замечания. Приёмка теста сама по себе не означает допуск к самостоятельному проектированию.</p></div><button class="btn ghost" id="print-course" type="button">Распечатать курс</button></div>
+      </section>
+      <footer class="footer"><span>АСУ ТП Академия · Образовательный материал · 2026</span><span>Без регистрации, рекламы, аналитики и отправки персональных данных</span><span><a href="MENTOR_GUIDE.md" target="_blank" rel="noopener">Руководство наставника</a> · <a href="README.md" target="_blank" rel="noopener">О курсе</a></span></footer>
+    </main>
+  </div>
+</body>
+</html>
