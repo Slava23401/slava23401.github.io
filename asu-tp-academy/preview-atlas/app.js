@@ -370,8 +370,16 @@ function setMenu(open, returnFocus = false) {
   document.getElementById('course-sidebar').classList.toggle('is-open', open);
   document.getElementById('menu-toggle').setAttribute('aria-expanded', String(open));
   document.getElementById('menu-scrim').hidden = !open;
-  if (open) document.getElementById('menu-close').focus();
-  else if (returnFocus) document.getElementById('menu-toggle').focus();
+  if (open) {
+    const focusClose = () => {
+      if (document.getElementById('course-sidebar').classList.contains('is-open')) {
+        document.getElementById('menu-close').focus();
+      }
+    };
+    focusClose();
+    // Recheck after the drawer's newly visible styles have been painted.
+    if (typeof window.requestAnimationFrame === 'function') window.requestAnimationFrame(focusClose);
+  } else if (returnFocus) document.getElementById('menu-toggle').focus();
 }
 let currentRoute = '';
 function route(focus = false) {
@@ -447,12 +455,15 @@ function init() {
     if (event.key === 'Escape') {event.preventDefault(); setMenu(false,true);}
     if (event.key === 'Tab') {
       const nodes = [...document.querySelectorAll('#course-sidebar a, #course-sidebar button')].filter(el => el.getClientRects().length);
+      if (!nodes.length) return;
       const first = nodes[0], last = nodes[nodes.length-1];
-      if (event.shiftKey && document.activeElement === first) {event.preventDefault(); last.focus();}
+      if (!nodes.includes(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && document.activeElement === first) {event.preventDefault(); last.focus();}
       else if (!event.shiftKey && document.activeElement === last) {event.preventDefault(); first.focus();}
     }
   });
-  window.matchMedia('(min-width: 701px)').addEventListener('change', event => {if(event.matches) setMenu(false);});
   document.getElementById('side-nav').addEventListener('click', event => {
     const link = event.target.closest('a');
     if (link) {
