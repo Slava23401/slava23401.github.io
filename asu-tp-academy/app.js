@@ -8,7 +8,7 @@ const STANDARDS = [
   {tier:1,id:'ГОСТ 34.602-2020',title:'Техническое задание на создание автоматизированной системы',why:'Содержание, оформление, требования к целям, функциям, приёмке и документированию АС.',url:'https://protect.gost.ru/gost/details/5876f733-ee91-431a-8cb6-9e02ea2436ac',kind:'ГОСТ · действует'},
   {tier:1,id:'ГОСТ Р 59793-2021',title:'Стадии и этапы создания автоматизированных систем',why:'Освоить общий жизненный цикл АС. ГОСТ 34.601-90 утратил силу в РФ.',url:'https://protect.gost.ru/gost/details/2899faee-25e2-4cd1-9f30-e7e01a4b9b8d',kind:'ГОСТ · действует'},
   {tier:1,id:'ГОСТ 21.110-2013',title:'Спецификация оборудования, изделий и материалов',why:'Правила оформления спецификаций в составе РД. Проверять количество, единицы измерения и взаимосвязь с чертежами.',url:'https://protect.gost.ru/gost/details/e135d52a-eccd-4b7d-b96f-e758c3fce18c',kind:'ГОСТ · действует'},
-  {tier:1,id:'Приказ Минэнерго № 6 от 15.01.2024',title:'Методические указания по технологическому проектированию ПС 35–750 кВ',why:'Понять требования к технологическим решениям ПС, в том числе автоматизированному управлению. Учитывать редакцию 2026 г.',url:'https://www.consultant.ru/document/cons_doc_LAW_480034/',kind:'НПА · проверить редакцию'},
+  {tier:1,id:'Приказ Минэнерго № 6 от 15.01.2024',title:'Методические указания по технологическому проектированию ПС 35–750 кВ',why:'Понять требования к технологическим решениям ПС, в том числе автоматизированному управлению. Проверить действующую редакцию и даты вступления изменений.',url:'https://www.consultant.ru/document/cons_doc_LAW_480034/',kind:'НПА · проверить редакцию'},
   {tier:2,id:'ГОСТ 34.201-2020',title:'Виды, комплектность и обозначение документов при создании АС',why:'Определение состава документации автоматизированной системы с учётом ТЗ и этапов.',url:'https://protect.gost.ru/gost/details/765f2a29-e368-4e1e-9eed-aeb1dc36a924',kind:'ГОСТ · действует'},
   {tier:2,id:'ГОСТ Р 59795-2021',title:'Требования к содержанию основных документов АС',why:'Что включать в описания системы, функций, технических средств и проектных решений.',url:'https://protect.gost.ru/gost/details/29834ae6-3ac4-4f76-859f-7704ed07f1c8',kind:'ГОСТ · действует'},
   {tier:2,id:'ГОСТ 21.208-2013',title:'Условные обозначения приборов и средств автоматизации в схемах',why:'Обозначения для схем автоматизации (взамен ГОСТ 21.404-85).',url:'https://protect.gost.ru/gost/details/59d18f69-ec1c-464b-8004-0d52d0f3b6e9',kind:'ГОСТ · действует'},
@@ -154,79 +154,324 @@ const QUIZ = [
 const progressKey='asutp-academy-progress-v1';
 const rdKey='asutp-academy-rd-v1';
 const examKey='asutp-academy-lastscore-v2';
-function storageGet(key){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch{return {}}}
-function storageSet(key,v){try{localStorage.setItem(key,JSON.stringify(v))}catch{/* storage can be disabled */}}
-const htmlEscape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function standardRender(){const q=(document.getElementById('standards-search').value||'').toLowerCase().trim();const tier=document.querySelector('#standard-filters .active')?.dataset.tier||'all';const rows=STANDARDS.filter(s=>(tier==='all'||String(s.tier)===tier)&&`${s.id} ${s.title} ${s.why}`.toLowerCase().includes(q));document.getElementById('standards-list').innerHTML=rows.length?rows.map(s=>`<article class="standard-item"><div><div class="standard-title"><span class="tier-label tier-${s.tier}">${s.tier===1?'Приоритет 1':s.tier===2?'Приоритет 2':'По задаче'}</span><h3><a href="${s.url}" target="_blank" rel="noopener noreferrer">${htmlEscape(s.id)}</a></h3></div><p><strong>${htmlEscape(s.title)}</strong></p><p>${htmlEscape(s.why)}</p><span class="status">${htmlEscape(s.kind)}</span></div><a class="source-link" href="${s.url}" target="_blank" rel="noopener noreferrer">Открыть источник ↗</a></article>`).join(''):'<div class="empty">По этому запросу документы не найдены.</div>'}
-function glossaryRender(){const q=(document.getElementById('glossary-search').value||'').toLowerCase().trim();const rows=GLOSSARY.filter(g=>g.join(' ').toLowerCase().includes(q));document.getElementById('glossary-grid').innerHTML=rows.length?rows.map(g=>`<dl class="glossary-item"><dt>${htmlEscape(g[0])}</dt><dd>${htmlEscape(g[1])}</dd></dl>`).join(''):'<div class="empty">Термин не найден.</div>'}
-function progressCount(){const p=storageGet(progressKey);const done=Object.keys(p).filter(k=>p[k]===true&&/^day-\d+-\d+$/.test(k)).length;const total=20;document.getElementById('global-progress').style.width=`${(done/total)*100}%`;document.getElementById('progress-text').textContent=`${done} из ${total} дней`;WEEKS.forEach((_,wi)=>{const n=Array.from({length:5},(_,di)=>p[`day-${wi}-${di}`]===true).filter(Boolean).length;const el=document.getElementById(`week-count-${wi}`);if(el)el.textContent=`${n} / 5 выполнено`});completionRender()}
-function roadmapRender(){const p=storageGet(progressKey);document.getElementById('week-list').innerHTML=WEEKS.map((w,wi)=>`<article class="week-card"><div class="week-head"><div><span class="week-number">НЕДЕЛЯ ${wi+1}</span><h3>${htmlEscape(w.title)}</h3><p><strong>Результат:</strong> ${htmlEscape(w.result)}</p></div><span class="week-count" id="week-count-${wi}"></span></div><div class="day-list">${w.days.map((d,di)=>`<label><input type="checkbox" data-day="day-${wi}-${di}" ${p[`day-${wi}-${di}`]===true?'checked':''}><span class="day-number">День ${wi*5+di+1}</span><span class="day-desc"><strong>${htmlEscape(d[0])}</strong><small>${htmlEscape(d[1])}</small><a class="lesson-link" href="lessons.html#day-${String(wi*5+di+1).padStart(2,'0')}">Открыть урок →</a></span></label>`).join('')}</div></article>`).join('');document.querySelectorAll('[data-day]').forEach(el=>el.addEventListener('change',()=>{const x=storageGet(progressKey);x[el.dataset.day]=el.checked;storageSet(progressKey,x);progressCount()}));progressCount()}
-function exercisesRender(){document.getElementById('exercise-list').innerHTML=EXERCISES.map(e=>`<article class="exercise-card"><div class="exercise-head"><div><span class="topic">${e.topic}</span><h3>${e.title}</h3></div><span class="points">${e.points} баллов</span></div><div class="exercise-content">${e.task}<details><summary>Разбор и критерии ответа (открывать после выполнения)</summary><div>${e.solution}</div></details></div></article>`).join('')}
-// Each attempt draws 24 questions from an expanded bank and shuffles answer positions.
-const EXAM_COUNT=24;
-let currentExam=[];
-let examIsGraded=false;
-function shuffled(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function makeExam(){return shuffled(QUIZ).slice(0,EXAM_COUNT).map(q=>{const choices=shuffled(q[1].map((value,i)=>({value,correct:i===q[2]})));return {title:q[0],choices:choices.map(c=>c.value),correct:choices.findIndex(c=>c.correct),explanation:q[3]}})}
-function examRender(){
- currentExam=makeExam();examIsGraded=false;
- document.getElementById('quiz-list').innerHTML=currentExam.map((q,i)=>`<fieldset class="quiz-card" id="question-${i}"><legend class="q-number">ВОПРОС ${String(i+1).padStart(2,'0')} / ${EXAM_COUNT}</legend><h3>${htmlEscape(q.title)}</h3><div class="answer-set">${q.choices.map((answer,a)=>`<label class="answer"><input type="radio" name="q${i}" value="${a}"><span>${htmlEscape(answer)}</span></label>`).join('')}</div><div class="question-feedback" hidden></div></fieldset>`).join('');
- const submit=document.querySelector('#quiz-form button[type="submit"]');submit.disabled=false;submit.removeAttribute('aria-disabled');
- const last=storageGet(examKey);
- document.getElementById('exam-score').textContent='— / 24';
- document.getElementById('exam-status').textContent=Number.isInteger(last.score)?`Последняя проверенная попытка: ${last.score} / 24`:'Результат появится после проверки';
- document.getElementById('exam-result').hidden=true;
- completionRender();
+
+// Preserve v1 data; malformed/unavailable storage must not break the course.
+const memoryStorage = new Map();
+let storageAvailable = true;
+function storageGet(key) {
+  if (memoryStorage.has(key)) return memoryStorage.get(key);
+  try {
+    const parsed = JSON.parse(localStorage.getItem(key) || '{}');
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch (error) {
+    if (!(error instanceof SyntaxError)) storageWarning();
+    return {};
+  }
 }
-function examCheck(ev){
- ev.preventDefault();if(examIsGraded)return;
- const form=document.getElementById('quiz-form');
- const answers=currentExam.map((_,i)=>form.querySelector(`input[name="q${i}"]:checked`));
- const missing=answers.map((a,i)=>a?null:i).filter(i=>i!==null);
- document.querySelectorAll('.quiz-card').forEach((card,i)=>card.classList.toggle('unanswered',missing.includes(i)));
- const panel=document.getElementById('exam-result');
- if(missing.length){
-  panel.hidden=false;panel.classList.add('low');
-  panel.textContent=`Ответьте на все ${EXAM_COUNT} вопроса. Заполнено: ${EXAM_COUNT-missing.length} из ${EXAM_COUNT}; осталось: ${missing.length}. Правильные ответы не раскрыты.`;
-  const first=document.querySelector(`#question-${missing[0]} input`);if(first){first.focus({preventScroll:true});document.getElementById(`question-${missing[0]}`).scrollIntoView({behavior:'smooth',block:'center'})}
-  return;
- }
- const correct=currentExam.reduce((n,q,i)=>n+(Number(answers[i].value)===q.correct?1:0),0);
- currentExam.forEach((q,i)=>{
-  const card=document.getElementById(`question-${i}`),got=Number(answers[i].value),ok=got===q.correct;
-  card.classList.remove('unanswered');
-  card.querySelectorAll('.answer').forEach((label,j)=>{label.classList.toggle('correct',j===q.correct);label.classList.toggle('incorrect',j===got&&!ok)});
-  const feedback=card.querySelector('.question-feedback');feedback.hidden=false;feedback.textContent=`${ok?'✓ Верно.':'✕ Требуется повторение.'} ${q.explanation}`;
- });
- examIsGraded=true;
- form.querySelectorAll('input[type="radio"]').forEach(el=>el.disabled=true);
- form.querySelector('button[type="submit"]').disabled=true;
- document.getElementById('exam-score').textContent=`${correct} / ${EXAM_COUNT}`;
- document.getElementById('exam-status').textContent=correct>=20?'Рекомендуемый порог по теории достигнут':'Теорию необходимо повторить';
- panel.hidden=false;panel.classList.toggle('low',correct<20);
- panel.textContent=`Результат: ${correct} из ${EXAM_COUNT} верных ответов. ${correct>=20?'Теоретический минимум достигнут. Для вывода о готовности нужны учебный проект и решение наставника.':'Разберите ошибки и нажмите «Пройти заново»: будет сформирован другой вариант.'} Эта проверка не является аттестацией.`;
- storageSet(examKey,{score:correct,date:new Date().toISOString(),total:EXAM_COUNT});
- completionRender();panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+function storageWarning() {
+  storageAvailable = false;
+  const notice = document.getElementById('storage-notice');
+  if (notice) notice.hidden = false;
 }
-function examReset(){examRender();window.scrollTo({top:document.getElementById('exam').getBoundingClientRect().top+window.scrollY-35,behavior:'smooth'})}
-function completionRender(){
- const p=storageGet(progressKey),done=Array.from({length:4},(_,w)=>Array.from({length:5},(_,d)=>p[`day-${w}-${d}`]===true?1:0)).flat().reduce((a,b)=>a+b,0);
- const last=storageGet(examKey),pass=Number.isInteger(last.score)&&last.score>=20;
- const el=document.getElementById('completion-status');if(!el)return;
- el.textContent=`Отмечено уроков: ${done}/20. Последний результат теста: ${Number.isInteger(last.score)?`${last.score}/24`:'не пройден'}. ${done===20&&pass?'Теоретические отметки выполнены. Для допуска к ограниченным задачам необходимы мини-проект ≥80/100, отсутствие критических ошибок и решение наставника.':'Для теоретического минимума нужно 20 отмеченных уроков и 20/24 в тесте; отметки в браузере не подтверждают практическую квалификацию.'}`;
+function storageSet(key, value) {
+  memoryStorage.set(key, value);
+  try { localStorage.setItem(key, JSON.stringify(value)); } catch { storageWarning(); }
 }
-function init(){
- standardRender();glossaryRender();roadmapRender();exercisesRender();examRender();
- document.getElementById('standards-search').addEventListener('input',standardRender);
- document.querySelectorAll('#standard-filters .chip').forEach(b=>b.addEventListener('click',()=>{document.querySelector('#standard-filters .active')?.classList.remove('active');b.classList.add('active');standardRender()}));
- document.getElementById('glossary-search').addEventListener('input',glossaryRender);
- document.getElementById('quiz-form').addEventListener('submit',examCheck);
- document.getElementById('quiz-list').addEventListener('change',event=>{if(!examIsGraded&&event.target.matches('input[type="radio"]')){event.target.closest('.quiz-card')?.classList.remove('unanswered');const panel=document.getElementById('exam-result');if(panel&&!panel.hidden)panel.hidden=true}});
- document.getElementById('quiz-reset').addEventListener('click',examReset);
- document.getElementById('print-course').addEventListener('click',()=>window.print());
- document.getElementById('reset-progress').addEventListener('click',()=>{if(window.confirm('Сбросить отметки за 20 дней обучения?')){storageSet(progressKey,{});roadmapRender()}});
- const r=storageGet(rdKey);document.querySelectorAll('[data-check]').forEach(el=>{el.checked=r[el.dataset.check]===true;el.addEventListener('change',()=>{const t=storageGet(rdKey);t[el.dataset.check]=el.checked;storageSet(rdKey,t)})});
- const links=[...document.querySelectorAll('.nav-link')];
- if('IntersectionObserver' in window){const observer=new IntersectionObserver(items=>{for(const e of items)if(e.isIntersecting){const found=links.find(a=>a.getAttribute('href')==='#'+e.target.id);if(found){links.forEach(a=>a.classList.remove('active'));found.classList.add('active')}}},{rootMargin:'-20% 0px -67% 0px'});document.querySelectorAll('main > section').forEach(s=>observer.observe(s))}
+const htmlEscape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const DAY_IDS = WEEKS.flatMap((week, wi) => week.days.map((_, di) => `day-${wi}-${di}`));
+const SECTION_IDS = ['start','work','substation','documents','signals','standards','roadmap','tasks','exam','dictionary','finish'];
+const SECTION_NAMES = ['Начало','Наша профессия','Устройство подстанции','Проектная документация','Сигналы и протоколы','Нормативная база','Программа обучения','Практика','Самопроверка','Словарь','Учебный проект'];
+const lessons = Array.isArray(window.ACADEMY_LESSONS) ? window.ACADEMY_LESSONS : [];
+function standardRender() {
+  const query = document.getElementById('standards-search').value.toLowerCase().trim();
+  const tier = document.querySelector('#standard-filters .active')?.dataset.tier || 'all';
+  const rows = STANDARDS.filter(s => (tier === 'all' || String(s.tier) === tier) && `${s.id} ${s.title} ${s.why}`.toLowerCase().includes(query));
+  document.getElementById('standards-list').innerHTML = rows.length ? rows.map(s => `<article class="standard-item"><div><div class="standard-title"><span class="tier-label tier-${s.tier}">${s.tier===1?'Приоритет 1':s.tier===2?'Приоритет 2':'По задаче'}</span><h3><a href="${s.url}" target="_blank" rel="noopener noreferrer">${htmlEscape(s.id)}</a></h3></div><p><strong>${htmlEscape(s.title)}</strong></p><p>${htmlEscape(s.why)}</p><span class="status">${htmlEscape(s.kind)}</span></div><a class="source-link" href="${s.url}" target="_blank" rel="noopener noreferrer">Открыть источник ↗</a></article>`).join('') : '<div class="empty">По этому запросу документы не найдены.</div>';
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+function glossaryRender() {
+  const query = document.getElementById('glossary-search').value.toLowerCase().trim();
+  const rows = GLOSSARY.filter(g => g.join(' ').toLowerCase().includes(query));
+  document.getElementById('glossary-grid').innerHTML = rows.length ? rows.map(g => `<dl class="glossary-item"><dt>${htmlEscape(g[0])}</dt><dd>${htmlEscape(g[1])}</dd></dl>`).join('') : '<div class="empty">Термин не найден.</div>';
+}
+function progressCount() {
+  const progress = storageGet(progressKey);
+  const done = DAY_IDS.filter(id => progress[id] === true).length;
+  document.getElementById('global-progress').style.width = `${done / 20 * 100}%`;
+  document.getElementById('progress-text').textContent = `${done} из 20 дней`;
+  WEEKS.forEach((_, wi) => {
+    const count = Array.from({length:5}, (_,di) => progress[`day-${wi}-${di}`] === true).filter(Boolean).length;
+    const element = document.getElementById(`week-count-${wi}`);
+    if (element) element.textContent = `${count} / 5 выполнено`;
+  });
+  document.querySelectorAll('[data-day]').forEach(input => {
+    input.checked = progress[input.dataset.day] === true;
+    input.closest('.day-row')?.classList.toggle('done', input.checked);
+  });
+  const nextIndex = DAY_IDS.findIndex(id => progress[id] !== true);
+  const next = nextIndex < 0 ? null : WEEKS[Math.floor(nextIndex / 5)].days[nextIndex % 5];
+  const route = next ? `#day-${nextIndex+1}` : '#finish';
+  document.getElementById('continue-learning').href = route;
+  document.getElementById('continue-learning').textContent = done === 0 ? 'Начать первый урок →' : next ? 'Продолжить обучение →' : 'Перейти к защите проекта →';
+  document.getElementById('next-lesson-title').textContent = next ? `День ${nextIndex+1} · ${next[0]}` : 'Обсудите результат с наставником';
+  document.getElementById('next-lesson-summary').textContent = next ? next[1] : 'Отметки изучения не заменяют проверку практических работ.';
+  document.getElementById('next-lesson-link').href = route;
+  document.getElementById('next-lesson-link').textContent = next ? 'Открыть урок →' : 'К учебному проекту →';
+  completionRender();
+}
+function changeDay(input) {
+  if (!DAY_IDS.includes(input.dataset.day)) return;
+  const progress = storageGet(progressKey);
+  progress[input.dataset.day] = input.checked;
+  storageSet(progressKey, progress);
+  progressCount();
+}
+function roadmapRender() {
+  document.getElementById('week-list').innerHTML = WEEKS.map((week, wi) => `<article class="week-card"><div class="week-head"><div><span class="week-number">НЕДЕЛЯ ${wi+1}</span><h3>${htmlEscape(week.title)}</h3><p><strong>Результат:</strong> ${htmlEscape(week.result)}</p></div><span class="week-count" id="week-count-${wi}"></span></div><div class="day-list">${week.days.map((day,di) => `<div class="day-row"><label class="day-check"><input type="checkbox" data-day="day-${wi}-${di}" aria-label="Отметить изучение дня ${wi*5+di+1}"></label><a class="day-link" href="#day-${wi*5+di+1}"><span class="day-number">День ${wi*5+di+1}</span><span class="day-desc"><strong>${htmlEscape(day[0])}</strong><small>${htmlEscape(day[1])}</small></span><span aria-hidden="true">→</span></a></div>`).join('')}</div></article>`).join('');
+}
+function teachingFigure(file, alt) {
+  return `<figure class="teaching-figure"><img src="materials/${file}" alt="${htmlEscape(alt)}" loading="lazy"><figcaption>${htmlEscape(alt)}. Учебная иллюстрация, не рабочая документация.</figcaption></figure>`;
+}
+function exercisesRender() {
+  document.getElementById('exercise-list').innerHTML = EXERCISES.map(exercise => `<article class="exercise-card"><div class="exercise-head"><div><span class="topic">${exercise.topic}</span><h3>${exercise.title}</h3></div><span class="points">${exercise.points} баллов</span></div><div class="exercise-content">${exercise.task}${exercise.topic === 'RS-485' ? teachingFigure('rs485.svg', 'Топология RS-485: схема для разбора') : ''}<details><summary>Разбор и критерии ответа (открывать после выполнения)</summary><div>${exercise.solution}</div></details></div></article>`).join('');
+}
+function safeResource(href) {
+  if (typeof href !== 'string') return '#roadmap';
+  try {
+    const url = new URL(href, location.href);
+    if (!['http:', 'https:', 'file:'].includes(url.protocol)) return '#roadmap';
+    return htmlEscape(href);
+  } catch { return '#roadmap'; }
+}
+function lessonRender() {
+  const html = DAY_IDS.map((id, index) => {
+    const day = index + 1;
+    const item = lessons.find(lesson => lesson.day === day);
+    const fallback = WEEKS[Math.floor(index/5)].days[index%5];
+    const title = item?.title || fallback[0];
+    const explanation = item?.explanation || ['Материал этого дня уточняется. Обсудите тему и задание с наставником.'];
+    const paragraphs = Array.isArray(explanation) ? explanation : [explanation];
+    const goal = item?.objective || item?.goal || fallback[1];
+    const task = item?.task || item?.exercise || 'Обсудите тему с наставником и запишите открытые вопросы.';
+    const deliverable = item?.deliverable || item?.result || 'Краткий конспект и список вопросов.';
+    const checklist = item?.checklist || item?.criteria || [];
+    const figures = {1:['substation.svg','Условная схема подстанции'],5:['signal-chain.svg','Путь сигнала от аппарата до приёмника'],13:['rs485.svg','Топология RS-485: схема для разбора']};
+    const figure = figures[day] ? teachingFigure(...figures[day]) : ''; 
+    return `<section class="section lesson-page" id="day-${day}" hidden><div class="lesson-header"><a href="#roadmap">← Программа обучения</a><span>Неделя ${Math.floor(index/5)+1} / День ${day}</span><span class="lesson-time">${htmlEscape(item?.time || 'С наставником')}</span></div><div class="section-heading"><span class="section-num">УРОК ${String(day).padStart(2,'0')} / 20</span><h2 tabindex="-1">${htmlEscape(title)}</h2></div><div class="lesson-body"><div class="lesson-goal"><span class="section-num">ЧТО НУЖНО ОСВОИТЬ</span><p>${htmlEscape(goal)}</p></div>${paragraphs.map(paragraph => `<p>${htmlEscape(paragraph)}</p>`).join('')}${figure}${item?.example ? `<div class="lesson-example"><h3>Разберём на примере</h3><p>${htmlEscape(item.example)}</p></div>` : ''}<div class="panel lesson-assignment"><h3>Практическое задание</h3><p>${htmlEscape(task)}</p><h3>Что показать наставнику</h3><p>${htmlEscape(deliverable)}</p>${checklist.length ? `<ul>${checklist.map(point => `<li>${htmlEscape(point)}</li>`).join('')}</ul>` : ''}</div><div class="lesson-resources">${(item?.resources || []).map(resource => `<a class="btn ghost small" href="${safeResource(resource.href)}" ${resource.href?.startsWith('#') ? '' : 'target="_blank" rel="noopener noreferrer"'}>${htmlEscape(resource.label)} ↗</a>`).join('')}</div><label class="lesson-complete"><input type="checkbox" data-day="${id}"><span>Материал изучен, задание выполнено</span></label><p class="lesson-note">Это личная отметка. Качество работы и готовность к следующей задаче подтверждает наставник.</p></div></section>`;
+  }).join('');
+  document.getElementById('lesson-pages').innerHTML = html;
+}
+let examGraded = false;
+const EXAM_COUNT = 24;
+let currentExam = [];
+function shuffled(items) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+function makeExam() {
+  return shuffled(QUIZ).slice(0, EXAM_COUNT).map(question => {
+    const choices = shuffled(question[1].map((value, index) => ({value, correct:index === question[2]})));
+    return [question[0], choices.map(choice => choice.value), choices.findIndex(choice => choice.correct), question[3]];
+  });
+}
+function validExamScore(last) {
+  return Number.isInteger(last.score) && last.score >= 0 && last.score <= EXAM_COUNT && last.total === EXAM_COUNT;
+}
+function completionRender() {
+  const element = document.getElementById('completion-status');
+  if (!element) return;
+  const progress = storageGet(progressKey);
+  const done = DAY_IDS.filter(id => progress[id] === true).length;
+  const last = storageGet(examKey);
+  const valid = validExamScore(last);
+  element.textContent = `Отмечено уроков: ${done}/20. Последний результат теста: ${valid ? `${last.score}/24` : 'не пройден'}. ${done === 20 && valid && last.score >= 20 ? 'Теоретические отметки выполнены. Для допуска к ограниченным задачам необходимы мини-проект ≥80/100, отсутствие критических ошибок и решение наставника.' : 'Для теоретического минимума нужно 20 отмеченных уроков и 20/24 в тесте; отметки в браузере не подтверждают практическую квалификацию.'}`;
+}
+function examRender() {
+  currentExam = makeExam();
+  examGraded = false;
+  document.getElementById('quiz-form').querySelector('[type=submit]').disabled = false;
+  document.getElementById('exam-score').textContent = `— / ${EXAM_COUNT}`;
+  document.getElementById('exam-status').textContent = 'Результат появится после проверки';
+  document.getElementById('quiz-list').innerHTML = currentExam.map((question,index) => `<fieldset class="quiz-card" id="question-${index}"><legend class="q-number">ВОПРОС ${String(index+1).padStart(2,'0')} / ${EXAM_COUNT}</legend><h3>${htmlEscape(question[0])}</h3><div class="answer-set">${question[1].map((answer,option) => `<label class="answer"><input type="radio" name="q${index}" value="${option}"><span>${htmlEscape(answer)}</span></label>`).join('')}</div><div class="question-feedback" hidden></div></fieldset>`).join('');
+  const last = storageGet(examKey);
+  if (validExamScore(last)) {
+    document.getElementById('exam-score').textContent = `${last.score} / ${EXAM_COUNT}`;
+    document.getElementById('exam-status').textContent = 'Предыдущая попытка в этом браузере';
+  }
+  completionRender();
+}
+function answeredCount() {
+  const count = document.querySelectorAll('#quiz-form input[type=radio]:checked').length;
+  document.getElementById('answered-count').textContent = `Отвечено: ${count} из ${EXAM_COUNT}`;
+  if (!examGraded) document.getElementById('quiz-validation').hidden = true;
+  return count;
+}
+function examCheck(event) {
+  event.preventDefault();
+  if (examGraded) return;
+  const form = document.getElementById('quiz-form');
+  const answered = answeredCount();
+  if (answered !== EXAM_COUNT) {
+    const warning = document.getElementById('quiz-validation');
+    warning.textContent = `Сначала ответьте на все ${EXAM_COUNT} вопросов. Сейчас заполнено ${answered}. Ответы и пояснения появятся только после полной попытки.`;
+    warning.hidden = false;
+    const first = currentExam.findIndex((_,i) => !form.querySelector(`input[name="q${i}"]:checked`));
+    document.getElementById(`question-${first}`).querySelector('input').focus();
+    document.getElementById('exam-status').textContent = `Нужно ответить ещё на ${EXAM_COUNT-answered} вопросов`;
+    return;
+  }
+  let correct = 0;
+  currentExam.forEach((question,index) => {
+    const card = document.getElementById(`question-${index}`);
+    const selected = Number(form.querySelector(`input[name="q${index}"]:checked`).value);
+    const ok = selected === question[2];
+    if (ok) correct++;
+    card.querySelectorAll('.answer').forEach((label,option) => {
+      label.classList.toggle('correct', option === question[2]);
+      label.classList.toggle('incorrect', option === selected && !ok);
+    });
+    card.querySelectorAll('input').forEach(input => {input.disabled = true;});
+    const feedback = card.querySelector('.question-feedback');
+    feedback.hidden = false;
+    feedback.textContent = `${ok ? '✓ Верно.' : '✕ Требуется повторение.'} ${question[3]}`;
+  });
+  examGraded = true;
+  form.querySelector('[type=submit]').disabled = true;
+  document.getElementById('exam-score').textContent = `${correct} / ${EXAM_COUNT}`;
+  document.getElementById('exam-status').textContent = correct >= 20 ? 'Учебный порог выполнен' : 'Повторите сложные темы';
+  const panel = document.getElementById('exam-result');
+  panel.hidden = false;
+  panel.classList.toggle('low', correct < 20);
+  panel.textContent = `Результат самопроверки: ${correct} из ${EXAM_COUNT}. ${correct >= 20 ? 'Рекомендуемый учебный порог выполнен. Дальше — практическая работа и проверка наставником.' : 'Изучите пояснения к ошибкам и повторите попытку.'} Это не подтверждение квалификации или допуск к самостоятельному проектированию.`;
+  storageSet(examKey, {score:correct,date:new Date().toISOString(),total:EXAM_COUNT});
+  completionRender();
+  panel.scrollIntoView({behavior: 'smooth', block:'nearest'});
+}
+function examReset() {
+  const form = document.getElementById('quiz-form');
+  form.reset();
+  form.querySelectorAll('input').forEach(input => {input.disabled = false;});
+  form.querySelector('[type=submit]').disabled = false;
+  document.querySelectorAll('.answer').forEach(element => element.classList.remove('correct','incorrect'));
+  document.querySelectorAll('.question-feedback').forEach(element => {element.hidden = true; element.textContent = '';});
+  document.getElementById('exam-result').hidden = true;
+  document.getElementById('quiz-validation').hidden = true;
+  document.getElementById('exam-score').textContent = `— / ${EXAM_COUNT}`;
+  document.getElementById('exam-status').textContent = 'Результат появится после проверки';
+  examGraded = false;
+  examRender();
+  answeredCount();
+  document.querySelector('#question-0 input').focus();
+}
+function setMenu(open, returnFocus = false) {
+  document.getElementById('course-sidebar').classList.toggle('is-open', open);
+  document.getElementById('menu-toggle').setAttribute('aria-expanded', String(open));
+  document.getElementById('menu-scrim').hidden = !open;
+  if (open) document.getElementById('menu-close').focus();
+  else if (returnFocus) document.getElementById('menu-toggle').focus();
+}
+let currentRoute = '';
+function route(focus = false) {
+  let id;
+  try { id = decodeURIComponent(location.hash.slice(1)) || 'start'; } catch { id = 'start'; }
+  if (id === 'main') {
+    if (currentRoute) {document.getElementById('main').focus(); return;}
+    id = 'start';
+  }
+  const isLesson = /^day-([1-9]|1[0-9]|20)$/.test(id);
+  if (!SECTION_IDS.includes(id) && !isLesson) id = 'start';
+  const section = document.getElementById(id);
+  if (!section) return;
+  currentRoute = id;
+  document.querySelectorAll('main .section').forEach(element => {element.hidden = element !== section;});
+  const currentNav = isLesson ? 'roadmap' : id;
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const active = link.getAttribute('href') === `#${currentNav}`;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
+  });
+  const day = isLesson ? Number(id.slice(4)) : null;
+  document.getElementById('current-section').textContent = day ? `День ${day}` : SECTION_NAMES[SECTION_IDS.indexOf(id)];
+  const heading = section.querySelector('h1,h2');
+  document.title = `${heading?.textContent.trim() || 'АСУ ТП Академия'} — АСУ ТП Академия`;
+  const index = SECTION_IDS.indexOf(id);
+  const previous = day ? (day === 1 ? ['roadmap','Программа обучения'] : [`day-${day-1}`,`День ${day-1}`]) : index > 0 ? [SECTION_IDS[index-1],SECTION_NAMES[index-1]] : null;
+  const next = day ? (day === 20 ? ['finish','Учебный проект'] : [`day-${day+1}`,`День ${day+1}`]) : index < SECTION_IDS.length-1 ? [SECTION_IDS[index+1],SECTION_NAMES[index+1]] : null;
+  document.getElementById('section-pagination').innerHTML = `${previous ? `<a href="#${previous[0]}">← ${htmlEscape(previous[1])}</a>` : ''}${next ? `<a href="#${next[0]}">${htmlEscape(next[1])} →</a>` : ''}`;
+  setMenu(false);
+  if (focus) {
+    if (heading) {heading.tabIndex = -1; heading.focus({preventScroll:true});}
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+}
+function applyTheme(value) {
+  const choice = ['light','dark','system'].includes(value) ? value : 'light';
+  const dark = choice === 'dark' || (choice === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  document.getElementById('theme-select').value = choice;
+}
+const openDetailsBeforePrint = new Set();
+function init() {
+  standardRender(); glossaryRender(); roadmapRender(); lessonRender(); exercisesRender(); examRender();
+  document.querySelectorAll('[data-day]').forEach(input => input.addEventListener('change', () => changeDay(input)));
+  progressCount();
+  document.getElementById('standards-search').addEventListener('input', standardRender);
+  document.querySelectorAll('#standard-filters .chip').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+    button.addEventListener('click', () => {
+      document.querySelectorAll('#standard-filters .chip').forEach(item => {item.classList.remove('active'); item.setAttribute('aria-pressed','false');});
+      button.classList.add('active'); button.setAttribute('aria-pressed','true'); standardRender();
+    });
+  });
+  document.getElementById('glossary-search').addEventListener('input', glossaryRender);
+  document.getElementById('quiz-form').addEventListener('submit', examCheck);
+  document.getElementById('quiz-form').addEventListener('change', answeredCount);
+  document.getElementById('quiz-reset').addEventListener('click', examReset);
+  document.getElementById('print-course').addEventListener('click', () => window.print());
+  document.getElementById('reset-progress').addEventListener('click', () => {
+    if (window.confirm('Сбросить отметки за 20 дней обучения?')) {storageSet(progressKey, {}); progressCount();}
+  });
+  const checks = storageGet(rdKey);
+  document.querySelectorAll('[data-check]').forEach(input => {
+    input.checked = checks[input.dataset.check] === true;
+    input.addEventListener('change', () => {const values = storageGet(rdKey); values[input.dataset.check] = input.checked; storageSet(rdKey, values);});
+  });
+  document.getElementById('menu-toggle').addEventListener('click', () => setMenu(document.getElementById('menu-toggle').getAttribute('aria-expanded') !== 'true'));
+  document.getElementById('menu-close').addEventListener('click', () => setMenu(false,true));
+  document.getElementById('menu-scrim').addEventListener('click', () => setMenu(false,true));
+  document.addEventListener('keydown', event => {
+    if (!document.getElementById('course-sidebar').classList.contains('is-open')) return;
+    if (event.key === 'Escape') {event.preventDefault(); setMenu(false,true);}
+    if (event.key === 'Tab') {
+      const nodes = [...document.querySelectorAll('#course-sidebar a, #course-sidebar button')].filter(el => el.getClientRects().length);
+      const first = nodes[0], last = nodes[nodes.length-1];
+      if (event.shiftKey && document.activeElement === first) {event.preventDefault(); last.focus();}
+      else if (!event.shiftKey && document.activeElement === last) {event.preventDefault(); first.focus();}
+    }
+  });
+  window.matchMedia('(min-width: 701px)').addEventListener('change', event => {if(event.matches) setMenu(false);});
+  document.getElementById('side-nav').addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (link) {
+      setMenu(false);
+      if (link.getAttribute('href') === location.hash) route(true);
+    }
+  });
+  window.addEventListener('hashchange', () => route(true));
+  const storedTheme = storageGet('asutp-academy-theme-v1');
+  applyTheme(storedTheme.value);
+  document.getElementById('theme-select').addEventListener('change', event => {storageSet('asutp-academy-theme-v1',{value:event.target.value}); applyTheme(event.target.value);});
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {if(document.getElementById('theme-select').value === 'system') applyTheme('system');});
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('details').forEach(details => {if(details.open) openDetailsBeforePrint.add(details); details.open = true;});
+  });
+  window.addEventListener('afterprint', () => {
+    document.querySelectorAll('details').forEach(details => {details.open = openDetailsBeforePrint.has(details);});
+    openDetailsBeforePrint.clear();
+  });
+  route(false);
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
